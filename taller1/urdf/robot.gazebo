@@ -30,6 +30,26 @@
     </joint>
   </transmission>
 
+  <transmission name="pivot_back_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="pivot_back_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pivot_back_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <transmission name="pivot_front_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="pivot_front_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="pivot_front_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
 	<!-- Base -->
   <gazebo reference="base_link">
     <material>Gazebo/Blue</material>
