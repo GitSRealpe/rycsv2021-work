@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: fproj_desc
+    relative_path: urdf/mobile/robot.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/exercise_robot.srdf
+  CONFIG:
+    author_name: sebastian
+    author_email: srealper@unal.edu.co
+    generated_timestamp: 1617980549
