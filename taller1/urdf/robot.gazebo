@@ -58,13 +58,13 @@
   <!-- Wheels -->
   <gazebo reference="wheel_left">
     <material>Gazebo/Grey</material>
-    <mu1>0.01</mu1>
+    <mu1>1</mu1>
     <mu2>1</mu2>
     <fdir1>0 0 1</fdir1>
   </gazebo>
   <gazebo reference="wheel_rigth">
     <material>Gazebo/Grey</material>
-    <mu1>0.01</mu1>
+    <mu1>1</mu1>
     <mu2>1</mu2>
     <fdir1>0 0 1</fdir1>
   </gazebo>
