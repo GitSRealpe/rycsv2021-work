@@ -15,7 +15,7 @@
     <visual>
         <origin xyz="0.0 0 0.0" rpy="0 0 $(eval pi/4*0)"/>
         <geometry>
-          <cylinder radius="0.3" length="0.10"/>
+          <cylinder radius="0.15" length="0.05"/>
         </geometry>
         <material name="blueish">
           <color rgba="0.2 0.0 0.7 1.0"/>
@@ -37,7 +37,7 @@
     <visual>
         <origin xyz="0.0 0 0.0" rpy="0 0 $(eval pi/4*0)"/>
         <geometry>
-          <cylinder radius="0.033" length="0.03"/>
+          <cylinder radius="0.025" length="0.03"/>
         </geometry>
         <material name="grisish">
           <color rgba="0.2 0.2 0.2 1.0"/>
@@ -46,7 +46,7 @@
     <collision>
       <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.033" length="0.03"/>
+        <cylinder radius="0.025" length="0.03"/>
       </geometry>
     </collision>
     <inertial>
@@ -59,7 +59,7 @@
   <visual>
       <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.033" length="0.03"/>
+        <cylinder radius="0.025" length="0.03"/>
       </geometry>
       <material name="grisish">
         <color rgba="0.2 0.2 0.2 1.0"/>
@@ -68,7 +68,7 @@
   <collision>
     <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
     <geometry>
-      <cylinder radius="0.033" length="0.03"/>
+      <cylinder radius="0.025" length="0.03"/>
     </geometry>
   </collision>
   <inertial>
@@ -81,7 +81,7 @@
   <visual>
       <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
       <geometry>
-        <sphere radius="0.033"/>
+        <sphere radius="0.025"/>
       </geometry>
       <material name="grisish">
         <color rgba="0.2 0.2 0.2 1.0"/>
@@ -90,7 +90,7 @@
   <collision>
     <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
     <geometry>
-      <sphere radius="0.033"/>
+      <sphere radius="0.025"/>
     </geometry>
   </collision>
   <inertial>
@@ -103,7 +103,7 @@
   <visual>
       <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
       <geometry>
-        <sphere radius="0.033"/>
+        <sphere radius="0.025"/>
       </geometry>
       <material name="grisish">
         <color rgba="0.2 0.2 0.2 1.0"/>
@@ -112,7 +112,7 @@
   <collision>
     <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
     <geometry>
-      <sphere radius="0.033"/>
+      <sphere radius="0.025"/>
     </geometry>
   </collision>
   <inertial>

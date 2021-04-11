@@ -12,8 +12,6 @@
   <!-- Create the Robot State Publisher -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" />
 
-  <node pkg="rviz" type="rviz" name="rviz_Visualization" args="-d $(find taller1)/config/cfg.rviz"/>
-
   <!-- Spawn Model in Gazebo -->
   <!-- Launch Gazebo-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -42,4 +40,6 @@
       args=  "joint_state_controller
               left_wheel_ctrl
               right_wheel_ctrl"/>
+
+  <node pkg="rviz" type="rviz" name="rviz_Visualization" args="-d $(find taller1)/config/cfg.rviz"/>
 </launch>
