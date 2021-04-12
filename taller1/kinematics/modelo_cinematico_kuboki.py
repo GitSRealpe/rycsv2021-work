@@ -11,7 +11,7 @@ print("kuboki command")
 
 l=0.120
 r=0.025
-modelo=np.array([[1,0,-l],[1,0,l],[0,1,0]])
+modelo=np.array([[1,0,l],[1,0,-l],[0,1,0]])
 print("modelo matricial: ",modelo)
 right_pub = rospy.Publisher('right_wheel_ctrl/command', Float64, queue_size=10)
 left_pub = rospy.Publisher('left_wheel_ctrl/command', Float64, queue_size=10)
