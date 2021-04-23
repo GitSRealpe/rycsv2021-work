@@ -28,7 +28,7 @@
   <arg name="z" default="0.01"/>
   <arg name="roll" default="0.0"/>
   <arg name="pitch" default="0.0"/>
-  <arg name="yaw" default="$(eval 0.0 * 3.141592 / 180.0)"/>
+  <arg name="yaw" default="$(eval 180 * 3.141592 / 180.0)"/>
 
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_test_robot" respawn="false" ns="$(arg robot_name)"
       args="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)
@@ -43,6 +43,6 @@
 
   <node pkg="rviz" type="rviz" name="rviz_Visualization" args="-d $(find taller2)/config/cfg.rviz"/>
 
-  <!-- <node pkg="taller2" type="true_odom.py" name="odom" /> -->
+  <node pkg="taller2" type="true_odom.py" name="odom" />
 
 </launch>
