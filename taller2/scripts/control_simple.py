@@ -11,8 +11,8 @@ import rospy
 twist_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=50)
 rospy.init_node('controlador_cartesiano', anonymous=True)
 rate = rospy.Rate(10) # 10hz
-k_v=0.4;k_w=1;
-x_goal=-3;y_goal=0;theta_goal=0
+
+x_goal=-3;y_goal=2;theta_goal=0
 pose=Pose()
 twist=Twist()
 def get_odom(odom_msg):
@@ -22,31 +22,29 @@ def get_odom(odom_msg):
     # print(pose)
 
 def controller():
-    # twist_pub.publish(odom_msg)
     rospy.sleep(1)
     print("en el controler")
+    k_v=0.4;k_w=1;
     while not rospy.is_shutdown():
         goal_from_bot=[x_goal-pose.position.x,y_goal-pose.position.y]
         print("goal_from_bot :", goal_from_bot)
-        theta_robot=euler_from_quaternion([pose.orientation.x,pose.orientation.y,pose.orientation.z,pose.orientation.w])
-        print("orientacion_bot :", degrees(theta_robot[2]))
+        (roll_bot,pitch_bot,yaw_bot)=euler_from_quaternion([pose.orientation.x,pose.orientation.y,pose.orientation.z,pose.orientation.w])
+        print("orientacion_bot :", degrees(yaw_bot))
         theta=atan2(goal_from_bot[1],goal_from_bot[0])
         print("angulo_punto_al_bot: ", degrees(theta))
-        # if (theta<0):
-        #     print("cerca a +-180")
-        #     theta=theta+2*pi
-        theta=theta-theta_robot[2]
-        print("angulo_bot_alpunto: ", degrees(theta))
+        if (theta>0 and yaw_bot<0 and x_goal<0):
+            yaw_bot=yaw_bot+2*pi
+        if (theta<0 and yaw_bot>0 and x_goal<0):
+            yaw_bot=(2*pi-yaw_bot)*-1
+        giro=theta-yaw_bot
+        print("angulo_a_girar: ", degrees(giro))
         print("\n")
 
         if ((sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2))<0.01):
             twist.linear.x=0
             twist.angular.z=0
         else:
-
-            # if (theta>radians(175) or theta<radians(-175)):
-            #     theta=2
-            twist.angular.z=k_w*(theta)
+            twist.angular.z=k_w*(giro)
             twist.linear.x=k_v*sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2)
 
         if(twist.linear.x>0.3): #control velocidad
