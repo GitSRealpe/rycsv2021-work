@@ -12,7 +12,6 @@ twist_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=50)
 rospy.init_node('controlador_cartesiano', anonymous=True)
 rate = rospy.Rate(10) # 10hz
 
-
 pose=Pose()
 twist=Twist()
 def get_odom(odom_msg):
@@ -44,20 +43,20 @@ def controller():
         print("angulo_a_girar: ", degrees(giro))
         print("\n")
 
-        if ((sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2))<0.3):
+        if ((sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2))<0.5):
             if (not next>=len(path)):
                 x_goal=path[next][0];y_goal=path[next][1];
                 next=next+1
             else:
-                twist.linear.x=0
-                twist.angular.z=0
-        else:
-            twist.angular.z=k_w*(giro)
-            twist.linear.x=k_v*sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2)
+                if ((sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2))<0.01):
+                    giro=0;pose.position.x=x_goal;pose.position.y=y_goal;
+        # else:
+        twist.angular.z=k_w*(giro)
+        twist.linear.x=k_v*sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2)
 
-        if(twist.linear.x>0.3): #control velocidad
+        if(twist.linear.x>0.3): #control velocidad lineal
             twist.linear.x=0.3
-        if(twist.angular.z>radians(60)):
+        if(twist.angular.z>radians(60)): #control velocidad angular
             twist.angular.z=radians(60)
         twist_pub.publish(twist)
         print(twist)

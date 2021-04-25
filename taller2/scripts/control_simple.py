@@ -11,20 +11,19 @@ import rospy
 twist_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=50)
 rospy.init_node('controlador_cartesiano', anonymous=True)
 rate = rospy.Rate(10) # 10hz
-
-x_goal=-3;y_goal=2;theta_goal=0
 pose=Pose()
+
 twist=Twist()
 def get_odom(odom_msg):
     pose.position.x=odom_msg.pose.pose.position.x
     pose.position.y=odom_msg.pose.pose.position.y
     pose.orientation=odom_msg.pose.pose.orientation
-    # print(pose)
 
 def controller():
     rospy.sleep(1)
     print("en el controler")
     k_v=0.4;k_w=1;
+    x_goal=-3;y_goal=2;theta_goal=0
     while not rospy.is_shutdown():
         goal_from_bot=[x_goal-pose.position.x,y_goal-pose.position.y]
         print("goal_from_bot :", goal_from_bot)
