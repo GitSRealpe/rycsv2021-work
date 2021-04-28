@@ -36,6 +36,10 @@ def controller():
         if (theta<0 and yaw_bot>0 and x_goal<0):
             yaw_bot=(2*pi-yaw_bot)*-1
         giro=theta-yaw_bot
+        if(giro>radians(180)):
+            giro=(2*pi-giro)*-1
+        elif(giro<radians(-180)):
+            giro=(-2*pi-giro)*-1
         print("angulo_a_girar: ", degrees(giro))
         print("\n")
 
@@ -48,6 +52,11 @@ def controller():
 
         if(twist.linear.x>0.3): #control velocidad
             twist.linear.x=0.3
+        if(twist.angular.z>1): #control velocidad angular
+            twist.angular.z=max_w
+        if(twist.angular.z<(-1)): #control velocidad angular
+            twist.angular.z=max_w*-1
+
         twist_pub.publish(twist)
         print(twist)
         rate.sleep()

@@ -25,7 +25,7 @@ def controller():
     rospy.sleep(1)
     print("en el controler")
     k_v=1;k_w=1;
-    path=[[-3.5,0],[-3.5,3.5],[1.5,3.5],[1.5,-1.5],[3.5,-1.5],[3.5,-8.0],[-2.5,-8.0],[-2.5,-5.5],[1.5,-5.5],[1.5,-3.5],[-1,-3.5]]
+    path=[[-0.6,0],[-3.5,0],[-3.5,3.5],[1.5,3.5],[1.5,-1.5],[3.5,-1.5],[3.5,-8.0],[-2.5,-8.0],[-2.5,-5.5],[1.5,-5.5],[1.5,-3.5],[-1,-3.5]]
     x_goal=path[0][0];y_goal=path[0][1];
     next=0
     while not rospy.is_shutdown():
@@ -40,6 +40,10 @@ def controller():
         if (theta<0 and yaw_bot>0 and x_goal<0):
             yaw_bot=(2*pi-yaw_bot)*-1
         giro=theta-yaw_bot
+        if(giro>radians(180)):
+            giro=(2*pi-giro)*-1
+        elif(giro<radians(-180)):
+            giro=(-2*pi-giro)*-1
         print("angulo_a_girar: ", degrees(giro))
         print("\n")
 
@@ -58,6 +62,8 @@ def controller():
             twist.linear.x=0.3
         if(twist.angular.z>radians(60)): #control velocidad angular
             twist.angular.z=radians(60)
+        if(twist.angular.z<(radians(-60))): #control velocidad angular
+            twist.angular.z=radians(-60)
         twist_pub.publish(twist)
         print(twist)
         rate.sleep()
