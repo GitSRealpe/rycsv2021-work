@@ -18,21 +18,24 @@ rospy.init_node('robot_odom', anonymous=True)
 rate = rospy.Rate(50) # 10hz
 
 def get_odom(modelos):
-    index=modelos.name.index(obj)
-    pose=modelos.pose[index]
-    vel=modelos.twist[index]
+    try:
+        index=modelos.name.index(obj)
+        pose=modelos.pose[index]
+        vel=modelos.twist[index]
 
-    odom_trans.transform.translation.x=pose.position.x;
-    odom_trans.transform.translation.y=pose.position.y;
-    odom_trans.transform.translation.z=0;
-    odom_trans.transform.rotation=pose.orientation;
+        odom_trans.transform.translation.x=pose.position.x;
+        odom_trans.transform.translation.y=pose.position.y;
+        odom_trans.transform.translation.z=0;
+        odom_trans.transform.rotation=pose.orientation;
 
-    odom_msg.pose.pose.position.x=pose.position.x;
-    odom_msg.pose.pose.position.y=pose.position.y;
-    odom_msg.pose.pose.position.z=0
-    odom_msg.pose.pose.orientation=pose.orientation;
-    odom_msg.twist.twist.linear.x=vel.linear.x;odom_msg.twist.twist.linear.y=vel.linear.y;
-    odom_msg.twist.twist.angular.z=vel.angular.z;
+        odom_msg.pose.pose.position.x=pose.position.x;
+        odom_msg.pose.pose.position.y=pose.position.y;
+        odom_msg.pose.pose.position.z=0
+        odom_msg.pose.pose.orientation=pose.orientation;
+        odom_msg.twist.twist.linear.x=vel.linear.x;odom_msg.twist.twist.linear.y=vel.linear.y;
+        odom_msg.twist.twist.angular.z=vel.angular.z;
+    except:
+        pass
 
 def pub_odom():
     h.frame_id="odom"
