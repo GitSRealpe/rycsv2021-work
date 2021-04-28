@@ -15,7 +15,6 @@
   <!-- Spawn Model in Gazebo -->
   <!-- Launch Gazebo-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <!-- <arg name="world_name" value="$(find taller2)worlds/taller2.world"/> -->
     <arg name="use_sim_time" value="true"/>
     <arg name="debug" value="false"/>
     <arg name="paused" value="false"/>
@@ -43,6 +42,7 @@
 
   <node pkg="rviz" type="rviz" name="rviz_Visualization" args="-d $(find taller2)/config/cfg.rviz"/>
 
-  <node pkg="taller2" type="true_odom.py" name="odom" />
+  <node pkg="taller2" type="true_odom.py" name="odom" ns="$(arg robot_name)"/>
+  <node pkg="taller1" type="modelo_cinematico_kuboki.py" name="modelo_cinematico"/>
 
 </launch>
