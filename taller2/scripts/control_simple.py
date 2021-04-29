@@ -1,18 +1,16 @@
 #!/usr/bin/env python
-from tf.transformations import quaternion_from_euler, euler_from_quaternion
-from geometry_msgs.msg import Pose, Twist, TransformStamped
+from tf.transformations import quaternion_from_euler, euler_from_quaternion, compose_matrix
+from geometry_msgs.msg import Pose, Twist
 from std_msgs.msg import String, Header
 from math import pi, radians, degrees, sqrt, atan2, cos, sin
-from gazebo_msgs.msg import ModelState, ModelStates
 from nav_msgs.msg import Odometry
-
+import numpy as np
 import rospy
 
 twist_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=50)
 rospy.init_node('controlador_cartesiano', anonymous=True)
 rate = rospy.Rate(10) # 10hz
 pose=Pose()
-
 twist=Twist()
 def get_odom(odom_msg):
     pose.position.x=odom_msg.pose.pose.position.x
@@ -25,21 +23,22 @@ def controller():
     k_v=0.4;k_w=1;
     x_goal=-3;y_goal=2;theta_goal=0
     while not rospy.is_shutdown():
-        goal_from_bot=[x_goal-pose.position.x,y_goal-pose.position.y]
-        print("goal_from_bot :", goal_from_bot)
+        print("true goal:", x_goal, y_goal)
         (roll_bot,pitch_bot,yaw_bot)=euler_from_quaternion([pose.orientation.x,pose.orientation.y,pose.orientation.z,pose.orientation.w])
-        print("orientacion_bot :", degrees(yaw_bot))
-        theta=atan2(goal_from_bot[1],goal_from_bot[0])
-        print("angulo_punto_al_bot: ", degrees(theta))
-        if (theta>0 and yaw_bot<0 and x_goal<0):
-            yaw_bot=yaw_bot+2*pi
-        if (theta<0 and yaw_bot>0 and x_goal<0):
-            yaw_bot=(2*pi-yaw_bot)*-1
-        giro=theta-yaw_bot
-        if(giro>radians(180)):
-            giro=(2*pi-giro)*-1
-        elif(giro<radians(-180)):
-            giro=(-2*pi-giro)*-1
+        orient = np.array([roll_bot,pitch_bot,yaw_bot])
+        trans = np.array([pose.position.x,pose.position.y,0])
+        T_bot = compose_matrix(angles=orient, translate=trans)
+        T_bot_inv=np.linalg.inv(T_bot)
+
+        orient = np.array([0,0,0])
+        trans = np.array([x_goal,y_goal,0])
+        T_punto = compose_matrix(angles=orient, translate=trans)
+
+        T_punto_bot=np.matmul(T_bot_inv,T_punto)
+        punto_x=T_punto_bot[0][3];punto_y=T_punto_bot[1][3]
+        print("goal from bot:", punto_x, punto_y)
+
+        giro=atan2(punto_y,punto_x)
         print("angulo_a_girar: ", degrees(giro))
         print("\n")
 
@@ -53,22 +52,20 @@ def controller():
         if(twist.linear.x>0.3): #control velocidad
             twist.linear.x=0.3
         if(twist.angular.z>1): #control velocidad angular
-            twist.angular.z=max_w
+            twist.angular.z=1
         if(twist.angular.z<(-1)): #control velocidad angular
-            twist.angular.z=max_w*-1
+            twist.angular.z=1*-1
 
         twist_pub.publish(twist)
         print(twist)
         rate.sleep()
 
-def suscriber():
-    rospy.Subscriber('/odom',Odometry,get_odom)
-    controller()
-    rospy.spin()
-
 if __name__ == '__main__':
     try:
         print("iniciando controllador cartesiano")
-        suscriber()
+        rospy.Subscriber('/odom',Odometry,get_odom)
+        controller()
+        rospy.spin()
+        # suscriber()
     except rospy.ROSInterruptException:
         pass

@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-from tf.transformations import quaternion_from_euler, euler_from_quaternion
-from geometry_msgs.msg import Pose, Twist, TransformStamped
+from tf.transformations import quaternion_from_euler, euler_from_quaternion, compose_matrix
+from geometry_msgs.msg import Pose, Twist
 from std_msgs.msg import String, Header
 from math import pi, radians, degrees, sqrt, atan2, cos, sin
-from gazebo_msgs.msg import ModelState, ModelStates
 from nav_msgs.msg import Odometry
-
+import numpy as np
 import rospy
 from dynamic_reconfigure.server import Server
 from taller2.cfg import dynamic_paramConfig
@@ -35,24 +34,24 @@ class Controller_dyn():
             k_v=self.datos["k_v"];k_w=self.datos["k_w"];
             print("x_goal:",self.datos["x_goal"],", y_goal:",self.datos["y_goal"],
                 ", max_v:",self.datos["max_v"],", max_w:",self.datos["max_w"],", k_v:",self.datos["k_v"],", k_w:",self.datos["k_w"])
-            goal_from_bot=[x_goal-pose.position.x,y_goal-pose.position.y]
-            print("goal_from_bot :", goal_from_bot)
+
+            print("true goal:", x_goal, y_goal)
             (roll_bot,pitch_bot,yaw_bot)=euler_from_quaternion([pose.orientation.x,pose.orientation.y,pose.orientation.z,pose.orientation.w])
-            print("orientacion_bot :", degrees(yaw_bot))
-            theta=atan2(goal_from_bot[1],goal_from_bot[0])
-            print("angulo_punto_al_bot: ", degrees(theta))
-            if (theta>0 and yaw_bot<0 and x_goal<0):
-                yaw_bot=yaw_bot+2*pi
-            if (theta<0 and yaw_bot>0 and x_goal<0):
-                yaw_bot=(2*pi-yaw_bot)*-1
-            giro=theta-yaw_bot
+            trans = np.array([pose.position.x,pose.position.y,0])
+            orient = np.array([roll_bot,pitch_bot,yaw_bot])
+            T_bot = compose_matrix(angles=orient, translate=trans)
+            T_bot_inv=np.linalg.inv(T_bot)
+
+            trans = np.array([x_goal,y_goal,0])
+            orient = np.array([0,0,0])
+            T_punto = compose_matrix(angles=orient, translate=trans)
+
+            T_punto_bot=np.matmul(T_bot_inv,T_punto)
+            punto_x=T_punto_bot[0][3];punto_y=T_punto_bot[1][3]
+            print("goal from bot:", punto_x, punto_y)
+
+            giro=atan2(punto_y,punto_x)
             print("angulo_a_girar: ", degrees(giro))
-            # print("\n")
-            if(giro>radians(180)):
-                giro=(2*pi-giro)*-1
-            elif(giro<radians(-180)):
-                giro=(-2*pi-giro)*-1
-            print("angulo_a_girar2: ", degrees(giro))
 
             if ((sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2))<0.01):
                 twist.linear.x=0
