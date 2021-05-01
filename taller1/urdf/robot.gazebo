@@ -55,6 +55,9 @@
     <material>Gazebo/Blue</material>
   </gazebo>
 
+  <gazebo reference="flecha">
+    <material>Gazebo/Black</material>
+  </gazebo>
   <!-- Wheels -->
   <gazebo reference="wheel_left">
     <material>Gazebo/Grey</material>
