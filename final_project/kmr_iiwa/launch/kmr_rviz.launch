@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Arg to change robot name and be able to spawn multiple robots-->
+  <arg name="robot_name" default="/"/>
+
+  <!-- Load the urdf into the parameter server. -->
+  <arg name="robot_xacro" value="$(find kmr_iiwa)/urdf/mobile_base/kmr_only.xacro"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg robot_xacro)"/>
+
+  <!-- Create the Robot State Publisher -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" />
+
+  <node pkg="rviz" type="rviz" name="rviz_Visualization" args="-d $(find kmr_iiwa)/config/kmr_cfg.rviz"/>
+  <!-- <node pkg="rviz" type="rviz" name="rviz_Visualization"/> -->
+
+  <!-- <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" /> -->
+
+</launch>
