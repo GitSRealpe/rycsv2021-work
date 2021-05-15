@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: kmr_iiwa
+    relative_path: urdf/mobile_base/kmr.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/kmr.srdf
+  CONFIG:
+    author_name: SRealpe
+    author_email: srealper@unal.edu.co
+    generated_timestamp: 1620078427
