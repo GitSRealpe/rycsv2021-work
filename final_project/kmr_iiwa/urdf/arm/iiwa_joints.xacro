@@ -1,0 +1,150 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+ 	<!--Joints-->
+	<!--joint1-->
+	<!-- <joint name="joint_1" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0.3"/>
+    <parent link="base_arm"/>
+    <child link="link1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000" lower="-3.1416" upper="3.1416" velocity="2.618"/>
+  </joint>
+  <transmission name="trans_joint_1">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="motor_joint_1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission> -->
+
+	<joint name="joint_a1" type="revolute">
+			<origin xyz="0 0 0.17" rpy="0 0 0"/>
+			<parent link="base_iiwa"/>
+			<child link="link_1"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="1000" lower="-2.9668" upper="2.9668" velocity="1.4834"/>
+	</joint>
+	<transmission name="joint_a1">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_a1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="joint_a1">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission>
+
+	<joint name="joint_a2" type="revolute">
+			<origin rpy="0 0 0" xyz="0 0.02 0.202"/>
+			<parent link="link_1"/>
+			<child link="link_2"/>
+			<axis xyz="0 1 0"/>
+			<limit effort="1000" lower="-2.0942" upper="2.0942" velocity="1.4834"/>
+	</joint>
+	<transmission name="joint_a2">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_a2">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="joint_a2">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission>
+
+	<joint name="joint_a3" type="revolute">
+			<origin rpy="0 0 0" xyz="0 0 0.22"/>
+			<parent link="link_2"/>
+			<child link="link_3"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="1000" lower="-2.9668" upper="2.9668" velocity="1.7452"/>
+	</joint>
+	<transmission name="joint_a3">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_a3">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="joint_a3">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission>
+
+	<joint name="joint_a4" type="revolute">
+			<origin rpy="0 0 0" xyz="0.0 -0.02 0.22"/>
+			<parent link="link_3"/>
+			<child link="link_4"/>
+			<axis xyz="0 1 0"/>
+			<limit effort="1000" lower="-2.0942" upper="2.0942" velocity="1.3089"/>
+	</joint>
+	<transmission name="joint_a4">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_a4">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="joint_a4">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission>
+
+	<joint name="joint_a5" type="revolute">
+			<origin rpy="0 0 0" xyz="0 0 0.20"/>
+			<parent link="link_4"/>
+			<child link="link_5"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="1000" lower="-2.9668" upper="2.9668" velocity="2.2688"/>
+	</joint>
+	<transmission name="joint_a5">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_a5">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="joint_a5">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission>
+
+	<joint name="joint_a6" type="revolute">
+			<origin rpy="0 0 0" xyz="0 -0.02 0.21"/>
+			<parent link="link_5"/>
+			<child link="link_6"/>
+			<axis xyz="0 1 0"/>
+			<limit effort="1000" lower="-2.0942" upper="2.0942" velocity="2.356"/>
+	</joint>
+	<transmission name="joint_a6">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_a6">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="joint_a6">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission>
+
+	<joint name="joint_a7" type="revolute">
+			<origin rpy="0 0 0" xyz="0 0 0.1"/>
+			<parent link="link_6"/>
+			<child link="link_7"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="1000" lower="-3.0541" upper="3.0541" velocity="2.356"/>
+	</joint>
+	<transmission name="joint_a7">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="joint_a7">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="joint_a7">
+			<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+  </transmission>
+
+
+</robot>

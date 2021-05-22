@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Macros de links y joints generalizados -->
+  <xacro:include filename="$(find kmr_iiwa)/urdf/arm/iiwa_joints.xacro"/>
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find kmr_iiwa)/urdf/arm/iiwa.gazebo"/>
+
+  <joint name="fixed" type="fixed">
+    <origin xyz="0.35 -0.15 0.0" rpy="0 0 0"/>
+    <parent link="robot_link"/>
+    <child link="base_iiwa"/>
+  </joint>
+
+  <link name="base_iiwa">
+    <inertial>
+      <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.05"  ixy="0"  ixz="0" iyy="0.06" iyz="0" izz="0.03" />
+    </inertial>
+    <visual>
+      <origin rpy="0.0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_0.stl"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_0.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="link_1">
+    <inertial>
+      <origin xyz="0 -0.03 0.12" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.1"  ixy="0"  ixz="0" iyy="0.09" iyz="0" izz="0.02" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_1.stl"/>
+      </geometry>
+      <material name="Orange"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="link_2">
+    <inertial>
+      <origin xyz="0.0003 0.059 0.042" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.05"  ixy="0"  ixz="0" iyy="0.018" iyz="0" izz="0.044" />
+    </inertial>
+    <visual>
+      <origin rpy="1.57 0 3.14" xyz="0 0 0.0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_2.stl"/>
+      </geometry>
+      <material name="White"/>
+    </visual>
+    <collision>
+      <origin rpy="1.57 0 3.14" xyz="0 0 0.0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="link_3">
+    <inertial>
+      <origin xyz="0 0.03 0.13" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.08"  ixy="0"  ixz="0" iyy="0.075" iyz="0" izz="0.01" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_3.stl"/>
+      </geometry>
+      <material name="Orange"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_3.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="link_4">
+    <inertial>
+      <origin xyz="0 0.067 0.034" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.03"  ixy="0"  ixz="0" iyy="0.01" iyz="0" izz="0.029" />
+    </inertial>
+    <visual>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_4.stl"/>
+      </geometry>
+      <material name="White"/>
+    </visual>
+    <collision>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_4.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="link_5">
+    <inertial>
+      <origin xyz="0.0001 0.021 0.076" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.02"  ixy="0"  ixz="0" iyy="0.018" iyz="0" izz="0.005" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_5.stl"/>
+      </geometry>
+      <material name="Orange"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_5.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="link_6">
+    <inertial>
+      <origin xyz="0 0.0006 0.0004" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.005"  ixy="0"  ixz="0" iyy="0.0036" iyz="0" izz="0.0047" />
+    </inertial>
+    <visual>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_6.stl"/>
+      </geometry>
+      <material name="White"/>
+    </visual>
+    <collision>
+      <origin rpy="1.57 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_6.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="link_7">
+    <inertial>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.001"  ixy="0"  ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/visual/link_7.stl"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_7.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+</robot>

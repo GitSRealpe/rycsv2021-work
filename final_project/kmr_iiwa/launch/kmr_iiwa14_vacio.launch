@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Arg to change robot name and be able to spawn multiple robots-->
+  <arg name="robot_name" default="/"/>
+
+  <!-- Load the urdf into the parameter server. -->
+  <arg name="robot_xacro" value="$(find kmr_iiwa)/urdf/mobile_base/kmr.xacro robot_namespace:=$(arg robot_name)"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg robot_xacro)"/>
+
+  <!-- Create the Robot State Publisher -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" />
+
+  <node pkg="rviz" type="rviz" name="rviz_Visualization" args="-d $(find kmr_iiwa)/config/cfg_odom.rviz"/>
+
+  <!-- Spawn Model in Gazebo -->
+  <!-- Launch Gazebo-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="paused" value="false"/>
+    <arg name="recording" value="false"/>
+  </include>
+
+  <!-- Robot initial pose -->
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="roll" default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+  <arg name="yaw" default="$(eval 180 * 3.141592 / 180.0)"/>
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_test_robot" respawn="false" ns="$(arg robot_name)"
+      args="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)
+          -urdf -param robot_description -model kmr_iiwa"/>
+
+  <!-- Create controller manager-->
+  <rosparam file="$(find kmr_iiwa)/config/iiwa_controller.yaml" command="load"/>
+  <node name="Robot_ctrller" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+      args=  "joint_state_controller
+              arm_controller"/>
+</launch>

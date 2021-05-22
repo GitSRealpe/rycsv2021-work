@@ -163,6 +163,7 @@ catkin_install_python(PROGRAMS
   scripts/true_odom.py
   scripts/control_simple_path.py
   scripts/control_simple.py
+  scripts/global_path.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="kmr_iiwa_commander" type="joint_commander" name="joint_commander" output="screen"/>
+  <node pkg="kmr_iiwa_commander" type="pose_commander" name="pose_commander" output="screen"/>
+  <node pkg="kmr_iiwa_commander" type="get_pose" name="pose_publisher"/>
+  <!-- <node pkg="kmr_iiwa_commander" type="path_commander" name="path_commander" output="screen"/> -->
+</launch>
