@@ -22,7 +22,7 @@ ros::Publisher pub;
 
   void MoveEnable::cmdCallback(const kmr_iiwa_commander::Num::ConstPtr& msg){
     ROS_INFO("Angulos articulares recibidos:");
-    for (size_t i = 0; i < 6; i++) {
+    for (size_t i = 0; i < 7; i++) {
       std::cout << msg->joints[i] << ' ';
     }
     std::cout << "\n";
@@ -54,6 +54,7 @@ ros::Publisher pub;
     joint_group_positions[3] = msg->joints[3];
     joint_group_positions[4] = msg->joints[4];
     joint_group_positions[5] = msg->joints[5];
+    joint_group_positions[6] = msg->joints[6];
     move_group.setJointValueTarget(joint_group_positions);
 
     // Now, we call the planner to compute the plan and visualize it.

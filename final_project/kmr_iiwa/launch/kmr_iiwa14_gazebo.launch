@@ -26,16 +26,21 @@
   </include>
 
   <!-- Robot initial pose -->
-  <arg name="x" default="6"/>
-  <arg name="y" default="-4.5"/>
+  <arg name="x" default="5.8"/>
+  <arg name="y" default="-4.1"/>
   <arg name="z" default="0.0"/>
   <arg name="roll" default="0.0"/>
   <arg name="pitch" default="0.0"/>
   <arg name="yaw" default="$(eval 180 * 3.141592 / 180.0)"/>
 
-  <node pkg="gazebo_ros" type="spawn_model" name="spawn_test_robot" respawn="false" ns="$(arg robot_name)"
+  <!-- <node pkg="gazebo_ros" type="spawn_model" name="spawn_bot" respawn="false" ns="$(arg robot_name)"
       args="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)
-          -urdf -param robot_description -model kmr_iiwa"/>
+          -urdf -param robot_description -model kmr_iiwa"/> -->
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_bot"
+          args="-x $(arg x) -y $(arg y) -z $(arg z)
+                -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)
+                -urdf -param robot_description -model kmr_iiwa"/>
 
   <!-- Create controller manager-->
   <rosparam file="$(find kmr_iiwa)/config/iiwa_controller.yaml" command="load"/>
