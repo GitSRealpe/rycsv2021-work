@@ -151,10 +151,22 @@ target_link_libraries(pose_commander ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 add_dependencies(pose_commander kmr_iiwa_commander_generate_messages_cpp)
 install(TARGETS pose_commander DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
+add_executable(path_commander src/path_commander.cpp)
+target_link_libraries(path_commander ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(path_commander kmr_iiwa_commander_generate_messages_cpp)
+install(TARGETS path_commander DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
 add_executable(get_pose src/get_pose.cpp)
 target_link_libraries(get_pose ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 add_dependencies(get_pose kmr_iiwa_commander_generate_messages_cpp)
 install(TARGETS get_pose DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+#chmod +x mypythonscript.py para que sea ejecutable
+catkin_install_python(PROGRAMS
+  scripts/rutina_path.py
+  scripts/rutina_poses.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
