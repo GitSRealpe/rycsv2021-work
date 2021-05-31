@@ -7,7 +7,7 @@
   <xacro:include filename="$(find kmr_iiwa)/urdf/arm/iiwa.gazebo"/>
 
   <joint name="fixed" type="fixed">
-    <origin xyz="0.35 -0.15 0.0" rpy="0 0 0"/>
+    <origin xyz="0.35 -0.15 0.0" rpy="0 0 -1.57"/>
     <parent link="robot_link"/>
     <child link="base_iiwa"/>
   </joint>
@@ -169,12 +169,35 @@
       </geometry>
       <material name="DarkGrey"/>
     </visual>
-    <collision>
+    <collision name="tip">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://kmr_iiwa/meshes/iiwa14/collision/link_7.stl"/>
       </geometry>
     </collision>
   </link>
+
+  <!--link_camera-->
+	<link name="cam_link">
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<!-- <mesh filename="package://irb140_sim/meshes/kinect/meshes/kinect.dae" scale="1 1 1"/> -->
+        <box size="0.01 0.01 0.01"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<joint name="cam_joint" type="fixed">
+    <parent link="link_7"/>
+    <child link="cam_link"/>
+    <origin rpy="0 -1.57 0" xyz="-0.06 0 0.0"/>
+  </joint>
+  <link name="cam_depth_link"></link>
+	<joint name="cam_depth_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57 "/>
+    <parent link="cam_link"/>
+    <child link="cam_depth_link"/>
+  </joint>
 
 </robot>
