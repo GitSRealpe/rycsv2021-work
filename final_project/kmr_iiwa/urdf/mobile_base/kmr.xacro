@@ -61,7 +61,7 @@
       </geometry>
     </collision>
 
-    <visual name="mid_base">
+    <!-- <visual name="mid_base">
       <origin rpy="0 0 0" xyz="0 0 -0.2865"/>
       <geometry>
         <box size="0.84 0.48 0.048"/>
@@ -73,9 +73,9 @@
       <geometry>
         <box size="0.920 0.51 0.055"/>
       </geometry>
-    </collision>
+    </collision> -->
 
-    <visual name="bottom_base">
+    <!-- <visual name="bottom_base">
       <origin rpy="0 0 0" xyz="0 0 -0.353"/>
       <geometry>
         <box size="1.08 0.63 0.085"/>
@@ -87,7 +87,7 @@
       <geometry>
         <box size="1.08 0.63 0.085"/>
       </geometry>
-    </collision>
+    </collision> -->
     <inertial>
       <mass value="339.96"/>
       <inertia ixx="18.238" ixy="0.0" ixz="0.0" iyy="39.1077" iyz="0.0" izz="42.397"/>

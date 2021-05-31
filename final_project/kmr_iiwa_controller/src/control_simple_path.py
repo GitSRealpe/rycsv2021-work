@@ -72,7 +72,6 @@ class path_Controller():
                     if ((sqrt((pose.position.x-x_goal)**2+(pose.position.y-y_goal)**2))<0.01):
                         giro=0;pose.position.x=x_goal;pose.position.y=y_goal;
 
-
             twist.angular.z=k_w*(giro)
             twist.linear.x=k_v*(punto_x)
             twist.linear.y=k_v*(punto_y)

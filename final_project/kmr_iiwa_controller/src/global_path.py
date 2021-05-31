@@ -11,7 +11,8 @@ import copy
 
 path_pub = rospy.Publisher('/global_path', Path, latch=True, queue_size=50)
 # puntos=[[1,0,90],[2,-3,45],[5.5,4.5,0],[-3,3,0],[-4,-2,0]]
-puntos=[[4,-4.5,180],[4,-2,90],[4,-2,0],[6,-2,0],[6,2,90],[4.5,2,90],[4,1,0],[3.5,1,0]]
+puntos=[[5.8,-4.1,180],[4,-4.5,180],[4,-2,90],[4,-2,0],[6,-2,0],[6,2,90],[4.5,2,90],[4,1,0],[3.5,1,0]]
+# puntos.reverse()
 
 rospy.init_node('robot_path', anonymous=True)
 rate = rospy.Rate(1) # 10hz

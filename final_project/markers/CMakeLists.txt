@@ -1,33 +1,19 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(kmr_iiwa_commander)
+project(markers)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+# add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  interactive_markers
-  moveit_core
-  moveit_visual_tools
-  moveit_ros_planning
-  moveit_ros_planning_interface
-  pluginlib
-  geometric_shapes
-  rosbag
-  tf2_ros
-  tf2_eigen
-  tf2_geometry_msgs
-  geometry_msgs
-  message_generation
-)
+find_package(catkin REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+find_package(rospy REQUIRED)
+find_package(roscpp REQUIRED)
+find_package(std_msgs REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -59,13 +45,12 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * uncomment the generate_messages entry below
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
-add_message_files(
-  FILES
-  PoseRPY.msg
-  RPY.msg
-  Num.msg
-  PoseRPYarray.msg
-)
+## Generate messages in the 'msg' folder
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -82,11 +67,10 @@ add_message_files(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
- DEPENDENCIES
- geometry_msgs
- std_msgs
-)
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -118,10 +102,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- # INCLUDE_DIRS include
- LIBRARIES kmr_iiwa_commander
- CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
- # DEPENDS system_lib
+#  INCLUDE_DIRS include
+#  LIBRARIES markers
+#  CATKIN_DEPENDS other_catkin_pkg
+#  DEPENDS rospy roscpp std_msgs
 )
 
 ###########
@@ -132,45 +116,16 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-    ${catkin_INCLUDE_DIRS}
-)
-
-include_directories(SYSTEM ${THIS_PACKAGE_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
-include_directories(${catkin_INCLUDE_DIRS})
-link_directories(${catkin_LIBRARY_DIRS})
-
-find_package(Eigen3 REQUIRED)
-
-add_executable(joint_commander src/joint_commander.cpp)
-target_link_libraries(joint_commander ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(joint_commander kmr_iiwa_commander_generate_messages_cpp)
-install(TARGETS joint_commander DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-add_executable(pose_commander src/pose_commander.cpp)
-target_link_libraries(pose_commander ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(pose_commander kmr_iiwa_commander_generate_messages_cpp)
-install(TARGETS pose_commander DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-add_executable(path_commander src/path_commander.cpp)
-target_link_libraries(path_commander ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(path_commander kmr_iiwa_commander_generate_messages_cpp)
-install(TARGETS path_commander DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-add_executable(get_pose src/get_pose.cpp)
-target_link_libraries(get_pose ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(get_pose kmr_iiwa_commander_generate_messages_cpp)
-install(TARGETS get_pose DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-#chmod +x mypythonscript.py para que sea ejecutable
-catkin_install_python(PROGRAMS
-  scripts/rutina_path.py
-  scripts/rutina_poses.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# ${catkin_INCLUDE_DIRS}
+# TODO: Check names of system library include directories (rospy, roscpp, std_msgs)
+  ${rospy_INCLUDE_DIRS}
+  ${roscpp_INCLUDE_DIRS}
+  ${std_msgs_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/kmr_iiwa_commander.cpp
+#   src/${PROJECT_NAME}/markers.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -181,7 +136,7 @@ catkin_install_python(PROGRAMS
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/kmr_iiwa_commander_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/markers_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -196,6 +151,9 @@ catkin_install_python(PROGRAMS
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
+#   ${rospy_LIBRARIES}
+#   ${roscpp_LIBRARIES}
+#   ${std_msgs_LIBRARIES}
 # )
 
 #############
@@ -245,7 +203,7 @@ catkin_install_python(PROGRAMS
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_kmr_iiwa_commander.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_markers.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -30,6 +30,6 @@
   <!-- <include file="$(find irb140_moveit_bin_pick)/launch/moveit_rviz.launch"></include> -->
 
   <!-- Show in Rviz -->
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find kmr_iiwa)/config/moveit.rviz"/>
+	<!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kmr_iiwa)/config/moveit.rviz"/> -->
 
 </launch>

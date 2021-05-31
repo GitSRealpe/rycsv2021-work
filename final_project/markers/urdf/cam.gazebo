@@ -1,65 +1,13 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-	<!-- ros_control plugin -->
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>$(arg robot_namespace)</robotNamespace>
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-    </plugin>
-  </gazebo>
-  <gazebo>
-    <plugin name="vacuum_plugin" filename="libvacuum_plugin.so">
-        <ignore>ground_plane,taller3,1_estante_0</ignore>
-    </plugin>
-  </gazebo>
-
   <gazebo reference="link_7">
-      <sensor name="detector" type="logical_camera">
-          <logical_camera>
-            <near>0.032</near>
-            <far>0.04</far>
-            <horizontal_fov>1.0</horizontal_fov>
-            <aspect_ratio>0.7</aspect_ratio>
-          </logical_camera>
-          <visualize>false</visualize>
-          <always_on>true</always_on>
-          <update_rate>2</update_rate>
-          <pose>0 0 0.02 0 0 0</pose>
-        </sensor>
-    </gazebo>
-
-  <!-- Base -->
-  <gazebo reference="base_iiwa">
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/DarkGrey</material>
+    <static>true</static>
   </gazebo>
 
-  <gazebo reference="link_1">
-    <material>Gazebo/Orange</material>
-  </gazebo>
-
-  <gazebo reference="link_2">
-    <material>Gazebo/White</material>
-  </gazebo>
-
-  <gazebo reference="link_3">
-    <material>Gazebo/Orange</material>
-  </gazebo>
-
-  <gazebo reference="link_4">
-    <material>Gazebo/White</material>
-  </gazebo>
-
-  <gazebo reference="link_5">
-    <material>Gazebo/Orange</material>
-  </gazebo>
-
-  <gazebo reference="link_6">
-    <material>Gazebo/White</material>
-  </gazebo>
-
-  <gazebo reference="link_7">
-    <material>Gazebo/Grey</material>
+  <gazebo>
+    <static>true</static>
   </gazebo>
 
   <gazebo reference="cam_link">

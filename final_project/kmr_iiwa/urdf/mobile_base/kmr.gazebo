@@ -13,6 +13,8 @@
 
   <gazebo reference="base_link">
     <material>Gazebo/Blue</material>
+    <mu1>100</mu1>
+    <mu2>50</mu2>
   </gazebo>
 
   <!-- Wheels -->
