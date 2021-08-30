@@ -1,0 +1,26 @@
+GlobalPlanner:
+  # Costmap traverse parameters
+  allow_unknown: true # Specifies whether or not to allow the planner to create plans that traverse unknown space
+
+  # Tolerance parameters
+  default_tolerance: 0.0 # A tolerance on the goal point for the planner
+
+  # Planning algorithm parameters
+  use_dijkstra: true # If true, use dijkstra's algorithm. Otherwise, A*.
+  use_quadratic: true # If true, use the quadratic approximation of the potential. Otherwise, use a simpler calculation.
+  use_grid_path: false # If true, create a path that follows the grid boundaries. Otherwise, use a gradient descent method.
+
+  old_navfn_behavior: false # If for some reason, you want global_planner to exactly mirror the behavior of navfn,
+                            # set this to true (and use the defaults for the other boolean parameters)
+
+  # Cost parameters
+  lethal_cost: 200 # Lethal Cost (dynamic reconfigure)
+  neutral_cost: 50 # Neutral Cost (dynamic reconfigure)
+  cost_factor: 3   # Factor to multiply each cost from costmap by (dynamic reconfigure)
+
+  # Orientation parameters
+  orientation_mode: 0 # None=0, Forward=1, Interpolate=2, ForwardThenInterpolate=3, Backward=4, Leftward=5, Rightward=6
+  orientation_window_size: 1 # What window to use to determine the orientation based on the position derivative specified by the orientation mode
+
+  # Debugging
+  publish_potential: true # Publish Potential Costmap (dynamic reconfigure)

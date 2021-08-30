@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Arguments -->
+    <!-- <arg name="map_file" default="$(find taller4)/map/mapa_taller4.yaml"/> -->
+    <arg name="map_file" default="$(find taller4)/map/map_karto.yaml"/>
+    <arg name="move_forward_only" default="false"/>
+
+    <!-- Map server -->
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+
+    <!-- Move_base (Navigation) -->
+    <include file="$(find taller4)/launch/move_base.launch">
+        <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+    </include>
+
+</launch>

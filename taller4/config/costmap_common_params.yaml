@@ -1,0 +1,18 @@
+# Sensor ray parameters
+obstacle_range: 3.0 # m
+raytrace_range: 3.5 # m
+
+# Robot appareance parameters
+footprint: [[-0.19, -0.14], [-0.19, 0.14], [0.065, 0.14], [0.065, -0.14]]
+#robot_radius: 0.177
+robot_base_frame: base_footprint
+#inflation_radius: 0.2
+
+# Sensor parameters
+observation_sources: scan # Eg:  laser_scan_sensor point_cloud_sensor
+scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+
+# Inflation paramaters
+cost_scaling_factor: 3.0
+
+map_type: costmap
