@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-
+  <node pkg="tf" type="static_transform_publisher" name="map" args="0 0 0 0 0 0 odom map 100" />
   <!-- Arg to change robot name and be able to spawn multiple robots-->
   <arg name="robot_name" default="/"/>
 

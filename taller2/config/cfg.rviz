@@ -107,6 +107,8 @@ Visualization Manager:
           Value: true
         base_link:
           Value: false
+        map:
+          Value: true
         odom:
           Value: true
         pivot_back:
@@ -136,6 +138,8 @@ Visualization Manager:
               {}
             wheel_rigth:
               {}
+          map:
+            {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -197,11 +201,21 @@ Visualization Manager:
       Topic: /global_path
       Unreliable: false
       Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: Map
+      Topic: /map
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: odom
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -225,7 +239,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10.713582992553711
+      Distance: 7.063828945159912
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -233,17 +247,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.2548910677433014
-        Y: -1.6121857166290283
-        Z: -0.07656431943178177
+        X: -0.5965254306793213
+        Y: 0.8894763588905334
+        Z: 1.1787446737289429
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3747963905334473
+      Pitch: 0.9447967410087585
       Target Frame: <Fixed Frame>
-      Yaw: 0.01354217529296875
+      Yaw: 5.596724987030029
     Saved: ~
 Window Geometry:
   Displays:
